@@ -1,6 +1,9 @@
 package main
 
-import linkedlist "dsa-practice/01linkedlist"
+import (
+	linkedlist "dsa-practice/01linkedlist"
+	doublylinkedlist "dsa-practice/02doublylinkedlist"
+)
 
 func main() {
 	ll := &linkedlist.LinkedList{}
@@ -9,5 +12,13 @@ func main() {
 	ll.Append(20)
 	ll.Append(30)
 
-	ll.Display()
+	// ll.Display()
+
+	dll := &doublylinkedlist.DLinkedList{}
+	dll.Append(10)
+	dll.Append(20)
+	dll.Append(30)
+	// dll.Append(40)
+
+	dll.Displey()
 }
