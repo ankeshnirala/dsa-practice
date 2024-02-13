@@ -37,7 +37,15 @@ func main() {
 	// fmt.Println(stack.ReverseString("ankesh"))
 	stack.Display()
 
-	fmt.Println(searching.LinearSearch([]int{2, 3, 5, 9, 4, 6}, 5))
-	fmt.Println(searching.BinarySearch([]int{2, 3, 5, 7, 9, 11}, 2))
+	// searching
+	ls := searching.Input{2, 3, 3, 3, 5, 9, 4, 6, 1}
+	fmt.Println(ls.LinearSearch(5))
+
+	bs := searching.Input{2, 3, 5, 7, 9, 11}
+	fmt.Println(bs.BinarySearch(5))
+
+	fmt.Println(ls.CountTargetOccurence(3))
+	fmt.Println(ls.FindMaxMin())
+	fmt.Println(ls.TwoSum(14))
 
 }
