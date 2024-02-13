@@ -4,7 +4,7 @@ import (
 	linkedlist "dsa-practice/01linkedlist"
 	doublylinkedlist "dsa-practice/02doublylinkedlist"
 	stack "dsa-practice/03stack"
-	searching "dsa-practice/04searching"
+	searching "dsa-practice/05searching"
 	"fmt"
 )
 
@@ -26,9 +26,9 @@ func main() {
 	// dll.Displey()
 
 	stack := &stack.Stack{}
-	// stack.Push("10")
-	// stack.Push("20")
-	// stack.Push("30")
+	stack.Push("10")
+	stack.Push("20")
+	stack.Push("30")
 
 	// fmt.Println(stack.Pop())
 	// fmt.Println(stack.Peek())
