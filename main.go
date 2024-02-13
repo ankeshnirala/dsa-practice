@@ -4,6 +4,7 @@ import (
 	linkedlist "dsa-practice/01linkedlist"
 	doublylinkedlist "dsa-practice/02doublylinkedlist"
 	stack "dsa-practice/03stack"
+	searching "dsa-practice/04searching"
 	"fmt"
 )
 
@@ -33,6 +34,10 @@ func main() {
 	// fmt.Println(stack.Peek())
 
 	// fmt.Println(stack.BalancedParenthesis("({)}"))
-	fmt.Println(stack.ReverseString("ankesh"))
-	// stack.Display()
+	// fmt.Println(stack.ReverseString("ankesh"))
+	stack.Display()
+
+	fmt.Println(searching.LinearSearch([]int{2, 3, 5, 9, 4, 6}, 5))
+	fmt.Println(searching.BinarySearch([]int{2, 3, 5, 7, 9, 11}, 2))
+
 }
