@@ -1,9 +1,23 @@
 package main
 
+import (
+	"fmt"
+	"sync"
+)
+
 func main() {
 	// var array array.Input
 
 	// array.ItemsOfInt = []int{10, 20, 15, 4, 4, 13}
+
+	// start := time.Now()
+	// fmt.Println(array.QuickSort(0, len(array.ItemsOfInt)-1))
+	// fmt.Println(time.Since(start))
+
+	// start := time.Now()
+	// sort.Ints(array.ItemsOfInt)
+	// fmt.Println(array.ItemsOfInt)
+	// fmt.Println(time.Since(start))
 	// fmt.Println("FindPeakElement: ", array.FindPeakElement())
 	// fmt.Println("FindMinMax: ", array.FindMinMax())
 	// fmt.Println("ReverseArray: ", array.ReverseArray())
@@ -51,4 +65,51 @@ func main() {
 	// array.ItemsOfStr = []string{"geeksforgeeks", "geeks", "geek", "geezer"}
 	// array.ItemsOfStr = []string{"apple", "ape", "april"}
 	// fmt.Println("LargestCommonPrefix: ", array.LargestCommonPrefix())
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+	oddCh := make(chan bool, 1)
+	evenCh := make(chan bool, 1)
+
+	oddCh <- true
+	go PrintOdd(&wg, oddCh, evenCh)
+	go PrintEven(&wg, oddCh, evenCh)
+
+	wg.Wait()
+
+}
+
+type Logger interface {
+	Info(msg string)
+	Warn(msg string)
+	Error(msg string, err error)
+}
+
+type StdoutLogger struct{}
+type FileLogger struct{}
+
+func (s *StdoutLogger) LogMessage(logger Logger, msg string) {
+	logger.Info(msg)
+}
+
+func PrintOdd(wg *sync.WaitGroup, oddCh, evenCh chan bool) {
+	defer wg.Done()
+	for item := range 20 {
+		<-oddCh
+		if item%2 == 1 {
+			fmt.Println("Odd:", item)
+		}
+		evenCh <- true
+	}
+}
+
+func PrintEven(wg *sync.WaitGroup, oddCh, evenCh chan bool) {
+	defer wg.Done()
+	for item := range 20 {
+		<-evenCh
+		if item%2 == 0 {
+			fmt.Println("Even:", item)
+		}
+		oddCh <- true
+	}
 }
