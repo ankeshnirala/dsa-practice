@@ -1,8 +1,7 @@
 package main
 
 import (
-	"fmt"
-	"sync"
+	linkedlistrevision01 "dsa-practice/01linkedlist-revision-01"
 )
 
 func main() {
@@ -66,50 +65,13 @@ func main() {
 	// array.ItemsOfStr = []string{"apple", "ape", "april"}
 	// fmt.Println("LargestCommonPrefix: ", array.LargestCommonPrefix())
 
-	var wg sync.WaitGroup
-	wg.Add(2)
-	oddCh := make(chan bool, 1)
-	evenCh := make(chan bool, 1)
+	ll := linkedlistrevision01.LinkedList{}
 
-	oddCh <- true
-	go PrintOdd(&wg, oddCh, evenCh)
-	go PrintEven(&wg, oddCh, evenCh)
+	ll.Insert("10")
+	ll.Insert("20")
+	ll.Insert("30")
+	ll.Insert("40")
 
-	wg.Wait()
-
-}
-
-type Logger interface {
-	Info(msg string)
-	Warn(msg string)
-	Error(msg string, err error)
-}
-
-type StdoutLogger struct{}
-type FileLogger struct{}
-
-func (s *StdoutLogger) LogMessage(logger Logger, msg string) {
-	logger.Info(msg)
-}
-
-func PrintOdd(wg *sync.WaitGroup, oddCh, evenCh chan bool) {
-	defer wg.Done()
-	for item := range 20 {
-		<-oddCh
-		if item%2 == 1 {
-			fmt.Println("Odd:", item)
-		}
-		evenCh <- true
-	}
-}
-
-func PrintEven(wg *sync.WaitGroup, oddCh, evenCh chan bool) {
-	defer wg.Done()
-	for item := range 20 {
-		<-evenCh
-		if item%2 == 0 {
-			fmt.Println("Even:", item)
-		}
-		oddCh <- true
-	}
+	// fmt.Println(ll)
+	ll.Display()
 }
